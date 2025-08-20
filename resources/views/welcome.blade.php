@@ -17,15 +17,12 @@
             @livewire('buscar-islas')
         @endif --}}
         <div class=" text-center">
-
             <div class="my-1 inline-block"><a href="{{ route('index_provincia', [$prov_tenerife]) }}"
                     class="text-gray-900  py-1 px-1  bg-base-200 hover:text-white hover:bg-black @if (session('provinciaSel') == $prov_tenerife->id) bg-gray-500 @endif">{{ $prov_tenerife->nombre }}
                 </a>
-
             </div>
             <div class="my-1 inline-block"> <a href="{{ route('index_provincia', [$prov_laspalmas]) }}"
                     class="text-gray-900  py-1 px-1  bg-base-200 hover:text-white hover:bg-black @if (session('provinciaSel') == $prov_laspalmas->id) bg-gray-500 @endif">{{ $prov_laspalmas->nombre }}
-
                 </a>
             </div>
 
@@ -74,13 +71,21 @@
                 @endforeach
             @endif
         </div>
-    </div>
-    @livewire('buscador-portal')
+    </div>  
+    {{-- @livewire('buscador-portal') --}}
     {{-- @livewire('buscar-muni') --}}
-
+    {{-- @livewire('buscador-portal') --}}  
     <!--Posts Container-->
-    @livewire('portal-buscar')
+    {{-- @livewire('portal-buscar') --}}
     <!--/ Post Content-->
+    
+    @livewire('buscador-portal')
+    @livewireScripts
+    @livewire('portal-buscar', [
+        'search' => request('search'),
+        'provincia' => session('provinciaSel'),
+        'municipio' => session('muniSel')
+    ], key('portal-buscar-'.now()->timestamp))
 
 
     <!--seccion de enlaces relacionados Container-->
@@ -105,10 +110,6 @@
                     </div>
                 @endforeach
             @endif
-
-
-
-
         </div>
     </div>
     <div class="my-20 p-10">
@@ -117,20 +118,18 @@
 
             @if (is_null(session('muniSelec')))
                 <div class="my-10">
-                    <span class="text-bold text-lg"> <strong> Las mejores acompaè´–antes para tus encuentros en
+                    <span class="text-bold text-lg"> <strong> Las mejores acompaÔøΩÔøΩÔøΩantes para tus encuentros en
                             {{ $provincia->nombre }}</strong></span>
                 </div>
                 {!!$provincia->texto_seo!!}
             @else
                 <div class="my-10">
-                    <span class="text-bold text-lg"> Las mejores acompaè´–antes para tus encuentros en
+                    <span class="text-bold text-lg"> Las mejores acompaÔøΩÔøΩÔøΩantes para tus encuentros en
                         {{ $municipio->nombre }}</span>
                 </div>
                 {!! $municipio->texto_seo !!}
             @endif
         @endif
 
-    </div>
-    <!--/ Fin enlaces Content-->
-    </div>
+    
 @endsection

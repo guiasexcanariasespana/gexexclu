@@ -243,15 +243,10 @@ class AnuncioController extends Controller
     public function aprobar_anuncio(Anuncio $anuncio)
     {        
         if(is_null($anuncio->fecha_de_publicacion)){
-
-            $fecha_publi = Carbon::now();
-        
+            $fecha_publi = Carbon::now();      
         }else{
-
             $fecha_publi = Carbon::parse($anuncio->fecha_de_publicacion);
-        
-        }
-             
+        }  
         $fecha_fin = Carbon::now();
         $hora_actual = $fecha_publi->format('H');
         if ($hora_actual > config('app.hora_agregar_dia')) {
@@ -265,7 +260,24 @@ class AnuncioController extends Controller
             'fecha_de_publicacion' => $fecha_publi,
             'fecha_caducidad' => $fecha_fin
         ]);
-        Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Aprobado'));
+        try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Aprobado'));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+            }
+        // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Aprobado'));
         return redirect()->route('admin.anuncios.index')
             ->with('success', trans('messages.edit-confirm'));
     }
@@ -273,11 +285,28 @@ class AnuncioController extends Controller
     public function rechazar_anuncio(Anuncio $anuncio)
     {
 
-        $anuncio->update(['estado' => 'Rechazado']);
+         $anuncio->update(['estado' => 'Rechazado']);
         $correo = new AnuncioFueMailable($anuncio, 'Rechazado');
-        Mail::to($anuncio->user->email)->send($correo);
+        try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send($correo);
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+            }
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
+    
     }
 
     public function pausar_anuncio(Anuncio $anuncio)
@@ -316,7 +345,6 @@ class AnuncioController extends Controller
         # $fecha_publi = Carbon::parse($anuncio->fecha_de_publicacion);
         $fecha_publi = Carbon::now();
         
-        
         ###Se reinicia la fecha
         # $fecha_publi = Carbon::parse($anuncio->fecha_de_publicacion);       
         $fecha_fin = Carbon::now();
@@ -337,10 +365,43 @@ class AnuncioController extends Controller
         $texto = 'El anuncio ' . $anuncio->slug . ' se reactivo el ' . $fechaPublicacion . '. Aún le restan ' .
         $anuncio->dias_restantes() . ' día/s. El día de en que se pausó se considera como utilizado';
         $this->anuncioNotaService->store_nota_anuncio($anuncio->id, $titulo, $texto);
-        Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Reactivado'));
-        
-        Mail::to(config('app.mail_admin'))->send(new ReactivoAdminMail($anuncio, $fecha_pausa));
-       
+        try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Reactivado'));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+        // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Reactivado'));
+        try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send(new ReactivoAdminMail($anuncio, $fecha_pausa));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+        // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Reactivado'));
+        // Mail::to(config('app.mail_admin'))->send(new ReactivoAdminMail($anuncio, $fecha_pausa));
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
     }
@@ -353,7 +414,24 @@ class AnuncioController extends Controller
             'estado_pago' => 'No',
             'fecha_pausa' => null,
         ]);
-        Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Finalizado'));
+        try{
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Finalizado'));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+        // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Finalizado'));
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
     }
@@ -560,7 +638,7 @@ class AnuncioController extends Controller
 
     public function imagenes_guardar_orden(Request $request, Anuncio $anuncio)
     {
-        
+        dd($request->all());
         if ($request->has('images')) {            
             $imagenes = json_decode($request->images, true);
             foreach ($imagenes as $position => $img_id) {

@@ -90,12 +90,8 @@
 
     <section>
       <div class="container">
-            
-
                 <form class="dropzone" drop-zone="" id="file-dropzone"></form>
-
-                <div class="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center justify-items-center m-5 sortable files">
-                    
+                <div class="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center justify-items-center m-5 sortable files">                   
                     @foreach ($imagenes_drop_zone as $imagen)
                         <div id="{{ $imagen['id'] }}" class=" template  " >
                             <div class="dz-preview dz-file-preview w-52 h-52 ">

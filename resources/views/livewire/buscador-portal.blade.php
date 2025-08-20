@@ -1,6 +1,5 @@
 <div class="mx-auto p-2">
     <div class="py-0 md:py-4 text-center mx-auto">
-        <!-- Contenido comentado eliminado para mejor lectura -->
     </div>
 
     <div class="flex flex-wrap justify-center items-center m-0 md:m-2 bg-gray-100">
@@ -13,9 +12,17 @@
             </svg>Buscador
         </span>
 
-        <x-input type='text' class='input w-full rounded-none md:w-56 lg:w-96' placeholder='Ingrese su búsqueda'
-            wire:model='search' />
-
+        <div>
+    <x-input 
+        type="text" 
+        class="input w-full rounded-none md:w-56 lg:w-96" 
+        placeholder="Buscar..."
+        wire:model="search"
+    />
+    @if($search)
+        <p>Buscando: {{ $search }}</p>
+    @endif
+</div>
         <div>
             <a class="font-bold p-1 md:p-4 text-gray-600 text-sm md:text-xl hover:bg-transparent">
                 {{ __('Acompañantes para compartir actividades') }} 

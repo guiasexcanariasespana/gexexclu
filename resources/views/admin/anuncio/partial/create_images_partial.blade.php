@@ -84,7 +84,7 @@
     </div>
 
     <div class="text-left my-6">
-        <button id="submit" class="px-4 py-2 text-lg font-medium text-white bg-red-700 rounded-lg hover:bg-green-600 transition-colors">
+        <button id="submit_imagenes" class="px-4 py-2 text-lg font-medium text-white bg-red-700 rounded-lg hover:bg-green-600 transition-colors">
             {{ __('Confirmar Imágenes y Orden') }}
         </button>
     </div>
@@ -108,3 +108,90 @@
         </div>
     </div>
 </section>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    
+    <script>
+        // Funciones para mostrar/ocultar el overlay
+        function showOverlay() {
+            document.getElementById('waitOverlay').style.display = 'flex';
+        }
+        
+        function hideOverlay() {
+            document.getElementById('waitOverlay').style.display = 'none';
+        }
+        
+        // Inicializar Sortable para el arrastre de imágenes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortable = new Sortable(document.getElementById('existing-images'), {
+                animation: 150,
+                ghostClass: 'sortable-fallback',
+                chosenClass: 'sortable-chosen',
+                dragClass: 'sortable-drag',
+                handle: '.dz-preview',
+                onStart: function() {
+                    showOverlay();
+                },
+                onEnd: function() {
+                    // Ocultar overlay después de reordenar
+                    setTimeout(hideOverlay, 300);
+                }
+            });
+        });
+
+        function reordenar_imagenes() {
+            //Reacomodamos la posicion de las imagenes
+            alert('Reordenando imágenes...');
+            $('.sortable').sortable('refreshPositions');
+            //Convertimos a array
+            let sortedIDs = $(".sortable").sortable("toArray");
+            //Enviamos la peticion al servidor para re ordenar
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.imagenes_guardar_orden', $anuncio) }}",
+                headers: {
+                    "X-CSRF-Token": "{{ csrf_token() }}"
+                },
+                data: {
+                    'images': JSON.stringify(sortedIDs)
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        }
+        // Evento para el botón de confirmar
+        document.getElementById('submit_imagenes').addEventListener('click', function() {
+            // showOverlay();
+            
+           // 1. Reordenar imágenes
+            reordenar_imagenes();
+            
+            // 2. Opcional: Enviar otras configuraciones (portada, etc.)
+            setTimeout(() => {
+                // Ocultar overlay y recargar después de 1.5 segundos (ajustable)
+                document.getElementById('waitOverlay').style.display = 'none';
+                window.location.reload(); // O mostrar mensaje de éxito
+
+            }, 1500);
+        });
+        
+        // Manejar clics en botones de quitar
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-btn')) {
+                showOverlay();
+                
+                // Encontrar el contenedor padre y eliminarlo
+                const item = e.target.closest('.template');
+                if (item) {
+                    // Simular una demora para la eliminación
+                    setTimeout(function() {
+                        item.remove();
+                        hideOverlay();
+                    }, 800);
+                }
+            }
+        });
+    </script>

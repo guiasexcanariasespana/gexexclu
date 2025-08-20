@@ -372,11 +372,9 @@ class UserController extends Controller
 
     public function update_anuncio(UpdateAnuncioRequest $request, Anuncio $anuncio)
     {
+        
         //$user->anuncios;
         //request()->validate(Anuncio::$rules);
-
-       
-
         $cambia_fecha_fin = false;
 
         // Verifico si cambia fecha de inicio o cantidad de dias
@@ -429,5 +427,6 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
+ 
     }
 }

@@ -259,15 +259,13 @@ class PortalController extends Controller
         $wordList = [
             'guiasexcanarias', 'excluiva', 'excluivas canarias', 'canarias exclusivas', 'españa exclusivas', 'guia sex canarias', 'giasex canarias', 'chicos', 'excluivas españa', 'escorts', 'escorts españa', 'canarias', 'masajistas', 'masajes canarias', 'masajes españa', 'acompañantes', 'españa', 'travestis', 'acompañantes españa', 'acompañantes canarias', 'amistad', 'conocer gente', 'citas en línea',
             'encontrar pareja en línea', 'conocer gente nueva', 'sitio de citas', 'relaciones en línea', 'amor en línea', 'búsqueda de pareja', 'encuentros en línea', 'solteros en línea', 'chat en línea', 'consejos de citas', 'servicio de citas', 'personas solteras', 'matchmaking', 'parejas compatibles', 'amistades en línea', 'relaciones serias', 'buscando amor',
-            'citas seguras', 'citas exitosas', 'encuentros rápidos', 'citas virtuales', 'encuentros amorosos', 'citas en línea seguras', 'red social de citas', 'servicio de emparejamiento', 'parejas felices', 'encontrar amor en línea', 'personas solteras cerca de mí', 'conexiones en línea', 'encuentros románticos'
+            'citas seguras', 'citas exitosas', 'encuentros rápidos', 'citas virtuales', 'encuentros amorosos', 'citas en línea seguras', 'red social de citas', 'servicio de emparejamiento', 'parejas felices', 'encontrar amor en línea', 'personas solteras cerca de mí', 'conexiones en línea', 'encuentros románticos', 'no_putas', 'no_puta'
 
         ];
 
         $wordList = ["amistad", "turismo"];
 
         SEOMeta::addKeyword($wordList);
-
-
 
         SEOMeta::setCanonical($seo_url);
 
@@ -296,7 +294,6 @@ class PortalController extends Controller
             'provincia'
         ));
     }
-
 
     public function index_provincia(Provincia $provincia)
     {

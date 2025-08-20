@@ -62,7 +62,7 @@
                         <h2 class="text-6xl  font-bold"> {{ __('Gestiona las imágenes de tu anuncio.') }} </h2>
 
                         <p class="text-xl text-red-700 sm:block ">
-                            {{ __(' Cadaaaaaa imágen tiene un orden, el mismo orden que tendrán en tu anuncio, la primera posición corresponde a la imagen de la portada') }}
+                            {{ __(' Cada imágen tiene un orden, el mismo orden que tendrán en tu anuncio, la primera posición corresponde a la imagen de la portada') }}
                         </p>
                     </div>
                 </div>

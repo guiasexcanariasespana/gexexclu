@@ -40,7 +40,7 @@
 
         <div class="row">
             <div class="form-group col-lg-6">
-                <label for="telefono">{{ __('Telefono') }}</label>
+                <label for="telefono" class="label-style">{{ __('Telefono') }}</label>
                 <input type="tel" name="telefono" id="telefono" 
                        class="form-control @error('telefono') is-invalid @enderror" 
                        value="{{ old('telefono', $user->telefono) }}" 
@@ -92,7 +92,7 @@
             </div>
             
             <div class="form-group col-lg-3">
-                <label for="edad">{{ __('Edad') }}</label>
+                <label for="edad" class= "label-style">{{ __('Edad') }}</label>
                 <select name="edad" id="edad" 
                         class="form-control @error('edad') is-invalid @enderror">
                     @for ($i = 18; $i <= 99; $i++)

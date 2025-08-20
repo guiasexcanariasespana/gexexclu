@@ -1,20 +1,15 @@
 @extends('layouts.portal')
 @section('title', 'Home')
 @section('content')
-
-
     <section>
         <div class="container mx-auto">
-
             <div class=" max-w-[1100px] mx-auto">
                 <div style="display: none">
                     {!! $anuncio->categoria->texto_seo !!}<br>
                     {!! $anuncio->provincia->texto_seo !!}<br>
                     {!! $anuncio->municipio->texto_seo !!}<br>
                 </div>
-
                 <div class="columns-1 md:columns-2  my-10 p-3 md:p-1">
-
                     <div class="col-1">
                         <p class="text-base font-extrabold md:text-5xl mb-10  ">
                             <span class="inline-block bg-[#bb1a19] py-1 px-2 text-base font-medium text-white">
@@ -32,7 +27,6 @@
                         @if (!is_null($anuncio->profesion))
                             <span class="  bg-gray-300  py-1 px-1 text-sm">{!! $anuncio->profesion !!}</span>
                         @endif
-
                         <div class="tooltip text-left" data-tip="Recuerda recomendar canariasexclusiva.com">
                             <h2 class="mt-4 mb-4 text-6xl font-extrabold  animate__animated animate__heartBeat">
                                 {{ $anuncio->telefono_publicacion }}
@@ -40,7 +34,6 @@
                             <p class="xs:text-base md:text-base lg:text-xl lg:p-2 text-red-700  animate-pulse">Di que llamas
                                 de <strong>canariasexclusiva.com</strong></p>
                         </div>
-
                         @if ($anuncio->whatsapp == 'Si')
                             <span class="bg-[#55cd6c] text-white font-semibold pr-2 rounded-xl ">
                                 <a href="https://wa.me/34{{ $anuncio->telefono_publicacion }}/?text=Chatea%20con%20este%20perfil%20de%canariasexclusiva.com"
@@ -50,15 +43,12 @@
                                 </a>
                                 CHAT</span>
                         @endif
-
-
                         <div
                             class="text-base p-4 bg-red-100 rounded-sm my-5  animate__animated animate__fadeInDown  shadow-xl">
                             <p class="font-bold break-normal text-xl my-2">{{ $anuncio->titulo }}</p>
                             <div class="text-ellipsis overflow-hidden">{!! $anuncio->presentacion !!}</div>
-
                         </div>
-                        @if (!is_null($anuncio->fecha_de_publicacion))
+                        {{-- @if (!is_null($anuncio->fecha_de_publicacion))
                             <p class="text-sm md:text-base text-[#bb1a19] font-bold">{{ $anuncio->fecha_de_publicacion }}
                                 <span class="text-[#bb1a19]">/</span> Fecha de Publicación
                             </p>
@@ -66,10 +56,8 @@
                             <p class="text-sm md:text-base text-[#bb1a19] font-bold">
                                 {{ $anuncio->created_at ? date('d-m-Y', strtotime($anuncio->created_at)) : 'N/D' }} <span
                                     class="text-[#bb1a19]">/</span> Fecha de Alta/Creacíon</p>
-                        @endif
+                        @endif --}}
                         <hr class="mt-5 mb-5 ">
-
-
                         <div class="mb-4">
                             <div class=" inline-block bg-gray-300 py-1 px-3 text-sm">
                                 {{ $anuncio->provincia ? $anuncio->provincia->nombre : 'N/D' }}</div>
@@ -142,10 +130,7 @@
                                         @endif
                                     </ul>
                                 </div>
-
                             </div>
-
-
                         </div>
                         <div class="my-7">
 
@@ -203,16 +188,10 @@
                                 <div class="badge badge-secondary"> {{ $anuncio->visitas }}</div>
                             </span>
                             <span ">
-
                                     <div class="badge badge-secondary"> <a class="link link-hover" href="{{ route('denuncia.form', $anuncio) }}" target="_blank">Denuncia de Perfil falso </a> </div>
                                 </span>
-
                                 <div class="text-center  ">
                                     <div class="relative z-10 inline-block">
-
-
-
-
                                         <div id="video" class="w-full my-4 aspect-video">
                                              @if ($anuncio->estado == 'Publicado')
                                 @if (!is_null($anuncio->video) && $anuncio->estado_video == 'Verificado')
@@ -231,14 +210,9 @@
                                     </div>
                                 @endif
                                 @endif
-
-
                         </div>
-
                     </div>
-
                 </div>
-
                 @if ($anuncio->estado == 'Publicado')
                     @foreach ($anuncio->imagenes_verificadas_ordenadas as $img)
                         <img alt="fotos" class="m-2 rounded-2xl "
@@ -256,15 +230,9 @@
         </div>
         </div>
     </section>
-
-
-
     <!-- ====== Acerca de mi Section End -->
-
     <section id="relacionados" class="bg-base-200  py-10 px-10  animate__animated animate__fadeInUp animate__delay-2s">
-
         <div class="container mx-auto h-2/3 ">
-
             <h2 class=" border-l-4 border-[#bb1a19] italic text-3xl font-bold my-8 pl-8 md:pl-12">Quizas pueda
                 interesarte...
             </h2>
@@ -272,7 +240,6 @@
                 @foreach ($anuncio->relacionados() as $anun)
                     <div class="hover:shadow-xl transition-transform transform hover:border-2 border-[{{ $anun->clase->color }}]"
                         style="background-color: {{ $anun->clase->color }}">
-
                         <div class="h-[500px]">
                             <a href="{{ route('portal.show', [ $anun->provincia, $anun->municipio,  $anun->categoria, $anun->user_id, $anun]) }}"
                                 class="no-underline hover:no-underline">
@@ -282,13 +249,8 @@
                                     <img class="object-cover w-full h-full"src="{{ config('app.url') . '/images/anuncio/' . $anun->id . '/' . $anun->portada->nombre }}"
                                         loading="lazy" oncontextmenu="return false">
                                 @endif
-
-
                             </a>
                         </div>
-
-
-
                         <div class="py-2 px-2">
                             <h3 class="text-xl font-extrabold">
                                 {{ \Illuminate\Support\Str::limit($anun->nombre, 50, $end = '...') }}</h3>
@@ -304,12 +266,7 @@
                                 <div class="inline-block bg-gray-300 py-1 px-3  text-xs">
                                     {{ \Illuminate\Support\Str::limit($anun->municipio->nombre, 15, $end = '...') }}</div>
                             @endif
-
                         </div>
-
-
-
-
                         <div class="inline-flex justify-start m-1 text-base px-2 py-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -351,21 +308,14 @@
                                     </a>
                                     CHAT</span>
                             @endif
-
-
                         </div>
-
-
                     </div>
                 @endforeach
             </div>
         </div>
         </div>
-
         </div>
-
         <div class="px-5 py-5 mt-5 justify-items-end">
-
             <a href="
             @if (is_null(session('categoriaSel')))
                 @if (is_null(session('muniSelec')))
@@ -385,10 +335,7 @@
             @auth
                 <a href="{{ route('dashboard', $anuncio) }}" class="text-md text-gray-700 ">
                     <span class="badge badge-lg">REGRESAR A MI PANEL</span></a>
-
             @endauth
         </div>
     </section>
-
-
 @endsection
