@@ -9,6 +9,10 @@
 /vendor
 .env
 .env.backup
+.env_vy.txt
+.env-old
+/public/error_log
+/database/canariasexclu_gex.sql
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

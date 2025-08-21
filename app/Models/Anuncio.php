@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Str; 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,6 +51,18 @@ class Anuncio extends Model
 {
     use SoftDeletes;
     use HasFactory;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($anuncio) {
+            $slugBase = Str::slug($anuncio->nombre);
+            $telefono = preg_replace('/[^0-9]/', '', $anuncio->telefono_publicacion); // Limpia el teléfono (solo números)
+            $anuncio->slug = $slugBase . '-' . $telefono; 
+        });
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

@@ -126,6 +126,9 @@ Route::get('/escort/{provincia}/todos/{categoria}',[PortalController::class,'ind
 Route::get('/escort/{provincia}/{municipio}/{categoria}',[PortalController::class,'index_categoria_municipio'])->name('index_categoria_municipio');
 ###Para provincia y municipio pero con categoría
 
+// Route::get('anuncios/{anuncio}', function (Anuncio $anuncio) {
+//     return view('anuncios.show', compact('anuncio'));
+// });
 
 Route::get('/escort/{provincia?}/{municipio?}', [PortalController::class, 'index'])->name('index');
 

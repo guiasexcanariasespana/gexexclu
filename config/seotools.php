@@ -11,9 +11,9 @@ return [
         'defaults'       => [
             'title'        => "Canariasexclusiva.com encuentros en España", // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
-            'description'  => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España', // set false to total remove
+            'description'  => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España','no_putas', // set false to total remove
             'separator'    => ' - ',
-            'keywords'     => ['escort','escort España', 'acompañantes', 'españa', 'acompañantes españa', 'amistad', 'conocer gente'],
+            'keywords'     => ['escort','escort España', 'acompañantes', 'españa', 'acompañantes españa', 'amistad', 'conocer gente', 'no_putas'],
             'canonical'    => 'current', // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
             'robots'       => 'all', // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
         ],
@@ -37,7 +37,7 @@ return [
          */
         'defaults' => [
             'title'       => 'canariasexclusiva.com encuentros en España', // set false to total remove
-            'description' => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España', // set false to total remove
+            'description' => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España','no_putas', // set false to total remove
             'url'         => null, // Set null for using Url::current(), set false to total remove
             'type'        => false,
             'site_name'   => false,
@@ -59,7 +59,7 @@ return [
          */
         'defaults' => [
             'title'       => 'canariasexclusiva.com encuentros en España', // set false to total remove
-            'description' => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España', // set false to total remove
+            'description' => 'Escort en España para encuentros. Acompañantes chicas, chicos, transexuales, servicios de masajistas en España, no anuncios de sexo ni putas en España','no_putas', // set false to total remove
             'url'         => 'current', // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
             'type'        => 'WebPage',
             'images'      => [],

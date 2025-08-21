@@ -45,11 +45,9 @@ class PortalController extends Controller
         //     JsonLd::setDescription('Escort en Canarias España para encuentros. Acompañantes chicas, chicos, travestis, servicios de masajistas en Canarias España, no anuncios de sexo ni putas en Canarias España');
         //     JsonLd::addImage(config('app.url') . '/img/logo.png');
 
-        //     SEOMeta::addKeyword(['guiasexcanarias', 'excluiva', 'excluivas canarias' , 'canarias exclusivas', 'españa exclusivas', 'guia sex canarias', 'giasex canarias' ,'chicos' ,'excluivas españa', 'escort', 'escort españa', 'canarias', 'masajistas', 'masajes canarias', 'masajes españa' , 'acompañantes', 'españa', 'travestis', 'acompañantes españa', 'acompañantes canarias', 'amistad', 'conocer gente', 'citas en línea',
-        //     'encontrar pareja en línea', 'conocer gente nueva', 'sitio de citas', 'relaciones en línea', 'amor en línea', 'búsqueda de pareja', 'encuentros en línea', 'solteros en línea', 'chat en línea', 'consejos de citas', 'servicio de citas', 'personas solteras', 'matchmaking', 'parejas compatibles', 'amistades en línea', 'relaciones serias', 'buscando amor',
-        //     'citas seguras', 'citas exitosas', 'encuentros rápidos', 'citas virtuales', 'encuentros amorosos', 'citas en línea seguras', 'red social de citas', 'servicio de emparejamiento', 'parejas felices', 'encontrar amor en línea', 'personas solteras cerca de mí', 'conexiones en línea', 'encuentros románticos'
-
-        // ]);
+            SEOMeta::addKeyword(['guiasexcanarias', 'exclusiva', 'excluivas canarias' , 'canarias exclusivas', 'españa exclusivas', 'guia sex canarias', 'giasex canarias' ,'chicos' ,'excluivas españa', 'escort', 'escort españa', 'canarias', 'masajistas', 'masajes canarias', 'masajes españa' , 'acompañantes', 'españa', 'travestis', 'acompañantes españa', 'acompañantes canarias', 'amistad', 'conocer gente', 'citas en línea',
+            'encontrar pareja en línea', 'conocer gente nueva', 'sitio de citas', 'relaciones en línea', 'amor en línea', 'búsqueda de pareja', 'encuentros en línea', 'solteros en línea', 'chat en línea', 'consejos de citas', 'servicio de citas', 'personas solteras', 'matchmaking', 'parejas compatibles', 'amistades en línea', 'relaciones serias', 'buscando amor',
+            'citas seguras', 'citas exitosas', 'encuentros rápidos', 'citas virtuales', 'encuentros amorosos', 'citas en línea seguras', 'red social de citas', 'servicio de emparejamiento', 'parejas felices', 'encontrar amor en línea', 'personas solteras cerca de mí', 'conexiones en línea', 'encuentros románticos', 'no_putas' ]);
 
         // // OR
 
