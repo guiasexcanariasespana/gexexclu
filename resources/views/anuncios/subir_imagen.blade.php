@@ -142,27 +142,27 @@
        
         const MAXIMO_TAMANIO_BYTES = 2000000;
 
-        function reordenar_imagenes() {
-            //Reacomodamos la posicion de las imagenes
-            $('.sortable').sortable('refreshPositions');
-            //Convertimos a array
-            let sortedIDs = $(".sortable").sortable("toArray");
-            //Enviamos la peticion al servidor para re ordenar
-            $.ajax({
-                type: "POST",
-                url: "{{ route('imagenes_guardar_orden', $anuncio) }}",
-                headers: {
-                    "X-CSRF-Token": "{{ csrf_token() }}"
-                },
-                data: {
-                    'images': JSON.stringify(sortedIDs)
-                },
-                dataType: "json",
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        }
+        // function reordenar_imagenes() {
+        //     //Reacomodamos la posicion de las imagenes
+        //     $('.sortable').sortable('refreshPositions');
+        //     //Convertimos a array
+        //     let sortedIDs = $(".sortable").sortable("toArray");
+        //     //Enviamos la peticion al servidor para re ordenar
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ route('imagenes_guardar_orden', $anuncio) }}",
+        //         headers: {
+        //             "X-CSRF-Token": "{{ csrf_token() }}"
+        //         },
+        //         data: {
+        //             'images': JSON.stringify(sortedIDs)
+        //         },
+        //         dataType: "json",
+        //         success: function(data) {
+        //             console.log(data)
+        //         }
+        //     });
+        // }
         
 
         //Seleccionamos el template donde va a ser mostrado el preview

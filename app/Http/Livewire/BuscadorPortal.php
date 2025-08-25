@@ -16,11 +16,24 @@ class BuscadorPortal extends Component
     public $municipios = [];
     public $provincias;
     
-    protected $listeners = ['searchUpdated' => 'handleSearchUpdated'];
+    protected $listeners = ['searchUpdated' => 'handleSearchUpdated', 'cambio_categoria'=>'updateCategoria'];
 
     public function mount()
     {
         $this->provincias = Provincia::all();
+
+        // Recuperar valores de sesión si existen
+        $this->search = session('search', '');
+        $this->categoriaSeleted = session('categoriaSel', 0);
+        $this->selectedProvincia = session('provinciaSel');
+        $this->selectedMuni = session('muniSelec');
+        
+        // Cargar municipios si hay provincia seleccionada
+        if ($this->selectedProvincia) {
+            $this->municipios = Municipio::where('provincia_id', $this->selectedProvincia)
+                ->orderBy('nombre')
+                ->get();
+        }
     }
 
     public function render()
@@ -33,7 +46,7 @@ class BuscadorPortal extends Component
     public function updatingSearch($value)
     {
         $this->search = $value;
-        $this->emit('performSearch', $value);
+        $this->dispatch('performSearch', $value);
     }
 
     public function updatingSelectedProvincia($provincia_id)
@@ -41,17 +54,57 @@ class BuscadorPortal extends Component
         $this->municipios = Municipio::where('provincia_id', $provincia_id)
             ->orderBy('nombre')
             ->get();
-        $this->emit('filtersUpdated', [
+        $this->dispatch('filtersUpdated', [
             'search' => $this->search,
             'provincia' => $provincia_id
         ]);
     }
 
-    public function updatingselectedMuni($municipio_id)
+     public function updatedSearch($value)
     {
-        $this->emit('filtersUpdated', [
-            'search' => $this->search,
-            'municipio' => $municipio_id
-        ]);
+        session(['search' => $value]);
+        $this->dispatch('searching', search: $value);
     }
+
+    public function updatedSelectedProvincia($provincia_id)
+    {
+        session(['provinciaSel' => $provincia_id]);
+        session()->forget('muniSelec'); // Reset municipio al cambiar provincia
+        
+        $this->municipios = Municipio::where('provincia_id', $provincia_id)
+            ->orderBy('nombre')
+            ->get();
+            
+        $this->dispatch('selecciono_provincia', provincia_id: $provincia_id);
+    }
+
+    public function updatedSelectedMuni($municipio_id)
+    {
+        session(['muniSelec' => $municipio_id]);
+        $this->dispatch('selecciono_muni', municipio_id: $municipio_id);
+    }
+
+    public function updateCategoria($categoriaId)
+    {
+        $this->categoriaSeleted = $categoriaId;
+        session(['categoriaSel' => $categoriaId]);
+        $this->dispatch('cambio_categoria', categoria_id: $categoriaId);
+    }
+
+    public function realizarBusqueda()
+    {
+         $this->dispatch('lanzar_busqueda', 
+        search: $this->search,
+        categoria: $this->categoriaSeleted,
+        provincia: $this->selectedProvincia,
+        municipio: $this->selectedMuni
+    );
+    }
+
+    public function updatedCategoriaSeleted($value)
+    {
+        session(['categoriaSel' => $value]);
+        $this->dispatch('cambio_categoria', categoria_id: $value);
+    }
+
 }

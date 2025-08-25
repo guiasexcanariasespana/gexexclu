@@ -32,7 +32,7 @@
                                 {{ $anuncio->telefono_publicacion }}
                             </h2>
                             <p class="xs:text-base md:text-base lg:text-xl lg:p-2 text-red-700  animate-pulse">Di que llamas
-                                de <strong>canariasexclusiva.com</strong></p>
+                                de <strong>{{   env('APP_NAME') }}</strong></p>
                         </div>
                         @if ($anuncio->whatsapp == 'Si')
                             <span class="bg-[#55cd6c] text-white font-semibold pr-2 rounded-xl ">
@@ -41,22 +41,13 @@
                                     <img src="{{ config('app.url') }}/img/whatsapp.svg"
                                         class="stroke-current inline-block flex-shrink-0 h-6 w-6 ">
                                 </a>
-                                CHAT</span>
+                                {{__('CHAT')}}</span>
                         @endif
                         <div
                             class="text-base p-4 bg-red-100 rounded-sm my-5  animate__animated animate__fadeInDown  shadow-xl">
                             <p class="font-bold break-normal text-xl my-2">{{ $anuncio->titulo }}</p>
                             <div class="text-ellipsis overflow-hidden">{!! $anuncio->presentacion !!}</div>
                         </div>
-                        {{-- @if (!is_null($anuncio->fecha_de_publicacion))
-                            <p class="text-sm md:text-base text-[#bb1a19] font-bold">{{ $anuncio->fecha_de_publicacion }}
-                                <span class="text-[#bb1a19]">/</span> Fecha de Publicación
-                            </p>
-                        @else
-                            <p class="text-sm md:text-base text-[#bb1a19] font-bold">
-                                {{ $anuncio->created_at ? date('d-m-Y', strtotime($anuncio->created_at)) : 'N/D' }} <span
-                                    class="text-[#bb1a19]">/</span> Fecha de Alta/Creacíon</p>
-                        @endif --}}
                         <hr class="mt-5 mb-5 ">
                         <div class="mb-4">
                             <div class=" inline-block bg-gray-300 py-1 px-3 text-sm">

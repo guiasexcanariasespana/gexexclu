@@ -11,6 +11,8 @@ use App\Http\Controllers\AnunciosController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CookiesPolicyController;
 use App\Http\Controllers\DenunciaFormController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\TermsController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\PortalController;
@@ -44,7 +46,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 // Ruta secreta de admin login
 Route::get('/bielsa22admin/login', [LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('/bielsa22admin/login', [LoginController::class, 'login'])->name('admin.login.post');
-
 
 
 Route::get('/ejecutar-cron', function (Request $request) {
@@ -132,19 +133,12 @@ Route::get('/escort/{provincia}/{municipio}/{categoria}',[PortalController::clas
 
 Route::get('/escort/{provincia?}/{municipio?}', [PortalController::class, 'index'])->name('index');
 
-
-
-
 //Route::get('/escort/{provincia?}/{municipio?}', [PortalController::class, 'index'])->name('index');
-
-
 
 Route::get('/escort/{provincia}/{municipio}/{categoria}/{user_id}/{anuncio}', [PortalController::class, 'show'])->name('portal.show');
 Route::get('/set_provincia/{provincia}', [PortalController::class, 'set_provincia'])->name('set_provincia');
 Route::get('/set_municipio/{municipio}', [PortalController::class, 'set_municipio'])->name('set_municipio');
 Route::get('/set_provincia_y_categoria/{provincia}/{categoria}', [PortalController::class, 'set_provincia_y_categoria'])->name('set_provincia_y_categoria');
-
-
 
 
 Route::get('cookies-policy', [CookiesPolicyController::class, 'show'])->name('cookies.policy');
@@ -155,10 +149,13 @@ Route::get('denuncia/{anuncio}', [DenunciaFormController::class, 'form'])->name(
 
 Route::post('denuncia-send-form/{anuncio}', [DenunciaFormController::class, 'send'])->name('denuncia.send');
 
+Route::get('policy', [PolicyController::class, 'show'])->name('policy.show');
+
+Route::get('terms', [TermsController::class, 'show'])->name('terms.show');
+
 Route::get('contact', [ContactFormController::class, 'form'])->name('contact.form');
 
 Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
-
 
 
 Route::get('/paypal/process_cambio/{orderId}', [PayPalController::class, 'process_cambio'])->name('paypal.process_cambio');
