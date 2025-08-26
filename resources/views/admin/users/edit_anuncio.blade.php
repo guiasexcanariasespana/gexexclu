@@ -35,16 +35,16 @@
         <div class="card-body">
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <p><strong>{{ __('User') }}:</strong> ({{ $user->id }}) {{ $user->name }}</p>
+                    <p><strong>{{ __('Usuario') }}:</strong> ({{ $user->id }}) {{ $user->name }}</p>
                     <p><strong>{{ __('Contact') }}:</strong> {{ $user->telefono }} | {{ $user->email }}</p>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">
-                            <p><strong>{{ __('Images to Upload') }}:</strong> {{ $anuncio->imagenes_pendientes() }}</p>
+                            <p><strong>{{ __('Imágenes a Subir') }}:</strong> {{ $anuncio->imagenes_pendientes() }}</p>
                         </div>
                         <div class="col-6">
-                            <p><strong>{{ __('Images to Verify') }}:</strong> {{ $anuncio->cantidad_img_verificar() }}</p>
+                            <p><strong>{{ __('Imágenes para Verificar') }}:</strong> {{ $anuncio->cantidad_img_verificar() }}</p>
                         </div>
                     </div>
                 </div>
@@ -54,17 +54,16 @@
                 <div class="col-md-4">
                     @include('admin.anuncio.partial.verificacion_partial')
                 </div>
-
                 <div class="col-md-4">
-                    <h5>{{ __('Cover Image') }}</h5>
+                    <strong>{{ __('Imagén de portada') }}</strong>
                     @if($anuncio->portada)
                         <div class="image-wrapper">
                             <a href="{{ config('app.url').'/images/anuncio/'.$anuncio->id.'/'.$anuncio->portada->nombre }}" 
                                data-toggle="lightbox" data-gallery="gallery">
                                 <img src="{{ config('app.url').'/images/anuncio/'.$anuncio->id.'/'.$anuncio->portada->nombre }}" 
-                                     class="img-fluid mb-2" alt="Cover image">
+                                     class=" img-fluid img-thumbnail imagen-limitada" alt="imagen de portada">
                             </a>
-                            <p>{{ __('Position') }}: {{ $anuncio->portada->position }}</p>
+                            <p>{{ __('Posición') }}: {{ $anuncio->portada->position }}</p>
                         </div>
                     @endif
                 </div>
@@ -92,17 +91,13 @@
                     @endif
                 </div>
             </div>
-
             <hr>
            <div class="row">
-
                <div class="col-md-12 bg-light">
                    @include('admin.anuncio.partial.create_images_partial')
                </div>
            </div>
-
             <hr>
-
             <form method="POST" action="{{ route('admin.users.update_anuncio', $anuncio) }}" 
                   enctype="multipart/form-data" class="w-100">
                 @csrf
@@ -198,6 +193,12 @@
         #waitOverlay .text i {
             font-size: 3rem;
             margin-bottom: 1rem;
+        }
+        .imagen-limitada {
+            max-width: 400px !important;
+            max-height: 300px !important;
+            width: auto !important;
+            height: auto !important; /* Mantiene la proporción */
         }
     </style>
 @endsection

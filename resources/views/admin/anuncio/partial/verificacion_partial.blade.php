@@ -1,6 +1,6 @@
-    <strong>Foto Verificación:</strong>
+    <strong>{{__('Foto Verificación:')}}</strong>
     @if (is_null($anuncio->imagen_verificacion))
-        Aún no subió una imagen para verificar su perfil.
+        {{__('Aún no subió una imagen para verificar su perfil.')}}
         <form method="POST" action="{{ route('admin.subir_verificar_perfil', $anuncio) }}" role="form"
             enctype="multipart/form-data">
             @csrf
@@ -10,7 +10,7 @@
                 <div class="image-wrapper">
                     <img id="uploadPerfilPreview" class="img-fluid" src="{{ config('app.url') }}/img/logo.png" />
                     <button id="btnrm" name="button" onclick="limpiar_perfil(); return false;"
-                        style="display: none">Quitar
+                        style="display: none">{{__('Quitar')}}
                     </button>
                 </div>
 
@@ -29,7 +29,7 @@
             <a href="{{ config('app.url') . '/images/perfil/' . $anuncio->id . '/' . $anuncio->imagen_verificacion }}"
                 data-toggle="lightbox" data-gallery="gallery">
                 <img src="{{ config('app.url') . '/images/perfil/' . $anuncio->id . '/' . $anuncio->imagen_verificacion }}"
-                    class=" img-fluid img-thumbnail" style="height: 100px;">
+                    class=" img-fluid img-thumbnail imagen-limitada" style="height: 100px;">
             </a>
         </div>
         <div class="form-group">

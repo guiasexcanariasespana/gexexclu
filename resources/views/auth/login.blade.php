@@ -14,7 +14,6 @@
 
         <form method="POST" action="{{ isset($isAdminLogin) && $isAdminLogin ? route('admin.login.post') : route('login') }}">
             @csrf
-  esta es la pantalla de login
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />

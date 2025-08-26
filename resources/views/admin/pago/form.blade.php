@@ -96,7 +96,7 @@
             <!-- Fecha Transac Field -->
             <div class="space-y-1">
                 <label for="fecha_transac" class="block text-sm font-medium text-gray-700">Fecha Transac</label>
-                <input type="text"
+                <input type="date"
                        id="fecha_transac"
                        name="fecha_transac"
                        value="{{ old('fecha_transac', $pago->fecha_transac) }}"

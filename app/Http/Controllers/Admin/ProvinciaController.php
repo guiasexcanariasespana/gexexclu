@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateProvinciaRequest;
 use App\Models\Provincia;
 use App\Models\State;
 use Illuminate\Http\Request;
+use App\Models\Seo\Word;
+
 
 /**
  * Class ProvinciaController

@@ -13,6 +13,11 @@
 .absolute.inset-0 * {
     pointer-events: none;
 }
+.imagen-limitada {
+        max-width: 100px !important;
+        max-height: 100px !important;
+        object-fit: cover;
+    }
 
 /* Excepto los elementos interactivos que necesiten clicks */
 .absolute.inset-0 .btn-like, 

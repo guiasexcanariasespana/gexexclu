@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css">
+    
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -42,7 +43,6 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
                                         <th>Nombre</th>
                                         <th>Slug</th>
                                         <th>Provincia</th>

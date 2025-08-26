@@ -3,19 +3,6 @@
 @section('content')
     <!--Container-->
     <div class="container max-w-full mx-auto">
-
-        {{-- <div>@if (!is_null($provincia))
-            {{$provincia->texto_seo}}
-           @endif
-          </div> --}}
-
-        <!--Nav-->
-        {{-- @if (config('app.filtro_provincias_superior'))
-            @livewire('state-filtro')
-        @endif
-        @if (config('app.filtro_islas'))
-            @livewire('buscar-islas')
-        @endif --}}
         <div class=" text-center">
             <div class="my-1 inline-block"><a href="{{ route('index_provincia', [$prov_tenerife]) }}"
                     class="text-gray-900  py-1 px-1  bg-base-200 hover:text-white hover:bg-black @if (session('provinciaSel') == $prov_tenerife->id) bg-gray-500 @endif">{{ $prov_tenerife->nombre }}
@@ -25,7 +12,6 @@
                     class="text-gray-900  py-1 px-1  bg-base-200 hover:text-white hover:bg-black @if (session('provinciaSel') == $prov_laspalmas->id) bg-gray-500 @endif">{{ $prov_laspalmas->nombre }}
                 </a>
             </div>
-
         </div>
         <div class='py-0  mt-5 text-center '>
             @foreach ($municipios as $muni)
@@ -46,8 +32,6 @@
                         Todas
                     </a>
                 </div>
-
-
                 @foreach ($categorias as $categ)
                     @if (is_null(session('muniSelec')))
                         @if ($categ->cantidad_anuncios_provincia($provincia?->id) > 0)
@@ -72,12 +56,6 @@
             @endif
         </div>
     </div>  
-    {{-- @livewire('buscador-portal') --}}
-    {{-- @livewire('buscar-muni') --}}
-    {{-- @livewire('buscador-portal') --}}  
-    <!--Posts Container-->
-    {{-- @livewire('portal-buscar') --}}
-    <!--/ Post Content-->
     
     @livewireScripts
     @livewire('buscador-portal')
@@ -87,8 +65,6 @@
         'municipio' => session('muniSel')
     ], key('portal-buscar-'.now()->timestamp))
 
-    <!-- Buscador -->
-    {{-- @livewire('buscador-portal') --}}
 
     <!-- Resultados -->
     {{-- @livewire('portal-buscar') --}}
@@ -117,9 +93,7 @@
         </div>
     </div>
     <div class="my-20 p-10">
-
         @if (!is_null($provincia))
-
             @if (is_null(session('muniSelec')))
                 <div class="my-10">
                     <span class="text-bold text-lg"> <strong> {{__('Las mejores acompañantes para tus encuentros en')}}
@@ -133,7 +107,5 @@
                 </div>
                 {!! $municipio->texto_seo !!}
             @endif
-        @endif
-
-    
+        @endif  
 @endsection

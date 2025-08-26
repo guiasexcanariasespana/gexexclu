@@ -321,17 +321,52 @@ class AnuncioController extends Controller
         $texto = 'El anuncio ' . $anuncio->slug . ' se pausó el ' . $fecha_pausa . '. Aún le restan ' .
         $anuncio->dias_restantes() . ' día/s';
         $this->anuncioNotaService->store_nota_anuncio($anuncio->id, $titulo, $texto);
-        Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Pausado'));
-        $mensaje = 'Se ha pausado el anuncio ' . $anuncio->slug . 'del Usuario ' . $anuncio->user->name . '. El mismo
-        está publicado en la catergoría ' . $anuncio->categoria->nombre .
-        ' en la localidad ' . $anuncio->localidad . ' de la provincia ' . $anuncio->provincia->nombre . ' y le restan '
-        . $anuncio->dias_restantes() . ' de los ' . $anuncio->plane->dias . ' contratados. El día de en que se pausó se
-        considera como utilizado';
-        Mail::to(config('app.mail_admin'))->send(new AvisoAdminMail('Anuncio', 'Pausado', $mensaje, $anuncio));
-   //     Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Pausado'));
+       
+        try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Pausado'));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+        
+         try {
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                $mensaje = 'Se ha pausado el anuncio ' . $anuncio->slug . 'del Usuario ' . $anuncio->user->name . '. El mismo
+                está publicado en la catergoría ' . $anuncio->categoria->nombre .
+                ' en la localidad ' . $anuncio->localidad . ' de la provincia ' . $anuncio->provincia->nombre . ' y le restan '
+                . $anuncio->dias_restantes() . ' de los ' . $anuncio->plane->dias . ' contratados. El día de en que se pausó se
+                considera como utilizado';
+                Mail::to(config('app.mail_admin'))->send(new AvisoAdminMail('Anuncio', 'Pausado', $mensaje, $anuncio));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+        
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
     }
+
 
     public function reactivar_anuncio(Anuncio $anuncio)
     {
@@ -565,8 +600,26 @@ class AnuncioController extends Controller
     {
 
         $anuncio->update(['estado' => 'Suspendido']);
-        $correo = new AnuncioFueMailable($anuncio, 'Suspendido');
-        Mail::to($anuncio->user->email)->send($correo);
+        try{
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Finalizado'));
+                Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Suspendido'));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'anuncio_id' => $anuncio->id,
+                    'user_id' => $anuncio->user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
+
+
         return redirect()->route('admin.users.edit_anuncio', $anuncio)
             ->with('success', trans('messages.edit-confirm'));
     }

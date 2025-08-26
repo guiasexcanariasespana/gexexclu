@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @hasSection('denunciaTitle')
+    {{-- @hasSection('denunciaTitle')
         <title>@yield('denunciaTitle')</title>
     @endif
     
     @hasSection('denunciaDescription')
         <meta name="description" content="@yield('denunciaDescription')"> 
-    @endif
+    @endif --}}
 
     {!! SEO::generate() !!}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
@@ -96,6 +96,7 @@
         .btn-hover:hover .icon {
             transform: scale(1.1);
         }
+         
     </style>
 </head>
 

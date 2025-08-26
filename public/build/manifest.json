@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-BCvMDqHU.css",
+    "file": "assets/app-B1GrO_tT.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -11,6 +11,12 @@
     "file": "assets/app-B9CpbmfS.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/string-to-slug.js": {
+    "file": "assets/string-to-slug-l0sNRNKZ.js",
+    "name": "string-to-slug",
+    "src": "resources/js/string-to-slug.js",
     "isEntry": true
   }
 }
