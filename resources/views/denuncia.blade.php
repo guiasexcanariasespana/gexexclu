@@ -125,10 +125,10 @@
                         </div>
                         <div class="ml-3 text-sm">
                             <label for="terms" class="font-medium text-gray-700">
-                                He leído y acepto la 
-                                <a href="{{ route('terms.show') }}" target="_blank" class="text-indigo-600 hover:text-indigo-500">Política de Términos de Servicio</a> 
-                                y la 
-                                <a href="{{ route('policy.show') }}" target="_blank" class="text-indigo-600 hover:text-indigo-500">Política de Privacidad</a>
+                                {{__('He leído y acepto la')}} 
+                                <a href="{{ route('terms.show') }}" target="_blank" class="text-indigo-600 hover:text-indigo-500">{{__('Política de Términos de Servicio')}}</a> 
+                                {{__('y la')}} 
+                                <a href="{{ route('policy.show') }}" target="_blank" class="text-indigo-600 hover:text-indigo-500">{{__('Política de Privacidad')}}</a>
                             </label>
                             @error('terms')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -139,10 +139,10 @@
                 
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <a href="{{ url()->previous() }}" class="px-6 py-3 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 transition duration-200 font-medium w-full sm:w-auto text-center">
-                        Cancelar
+                        {{__('Cancelar')}}
                     </a>
                     <button type="submit" class="px-6 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition duration-200 font-medium shadow-md w-full sm:w-auto text-center">
-                        Enviar Denuncia
+                        {{__('Enviar Denuncia')}}
                     </button>
                 </div>
             </form>
@@ -150,7 +150,7 @@
 
         <!-- Información de protección de datos -->
         <div class="bg-white border border-gray-200 shadow-xl rounded-xl p-6 md:p-8">
-            <h3 class="font-bold text-gray-900 text-xl text-center mb-6">INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS</h3>
+            <h3 class="font-bold text-gray-900 text-xl text-center mb-6">{{__('INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS')}}</h3>
 
             <div class="space-y-5">
                 <div>

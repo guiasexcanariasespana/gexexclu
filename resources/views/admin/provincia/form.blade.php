@@ -5,7 +5,7 @@
         <div class="row">
 
             <div class="form-group col-md-6">
-                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <label for="nombre" class="block text-sm font-medium text-gray-700">{{__('Nombre')}}</label>
                 <input type="text"
                     id="nombre"
                     name="nombre"
@@ -21,7 +21,7 @@
         <div class="row">
             <!-- Campo Slug -->
                 <div class="form-group col-md-6">
-                    <label for="slug" class="block text-sm font-medium text-gray-700">Slug</label>
+                    <label for="slug" class="block text-sm font-medium text-gray-700">{{__('Slug')}}</label>
                     <input type="text"
                         id="slug"
                         name="slug"
@@ -34,30 +34,10 @@
                     @enderror
                 </div>
         </div>
-
-        <!-- Campo Estado (comentado pero disponible) -->
-        {{-- @if(isset($states))
-        <div class="space-y-2">
-            <label for="state_id" class="block text-sm font-medium text-gray-700">Estado</label>
-            <select id="state_id"
-                    name="state_id"
-                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('state_id') border-red-500 @enderror">
-                @foreach($states as $id => $state)
-                    <option value="{{ $id }}" @selected(old('state_id', $provincia->state_id) == $id)>
-                        {{ $state }}
-                    </option>
-                @endforeach
-            </select>
-            @error('state_id')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-        </div>
-        @endif --}}
-
         <!-- Campo Texto SEO -->
         <div class="row">
             <div class="from-group col-md-12">
-                <label for="texto_seo" class="block text-sm font-medium text-gray-700">Texto SEO</label>
+                <label for="texto_seo" class="block text-sm font-medium text-gray-700">{{__('Texto SEO')}}</label>
                 <textarea id="texto_seo"
                         name="texto_seo"
                         rows="4"

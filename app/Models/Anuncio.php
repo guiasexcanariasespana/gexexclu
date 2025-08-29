@@ -484,11 +484,9 @@ class Anuncio extends Model
         $caduca = Carbon::parse($this->fecha_caducidad);
         
         $dias = $today->diffInDays($caduca, false);
-
+//    dd($dias);
         if ($dias >= 0) {
-            
             return false;
-
         }
 
         return true;

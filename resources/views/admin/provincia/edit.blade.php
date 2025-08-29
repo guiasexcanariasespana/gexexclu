@@ -12,7 +12,7 @@
 
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h1 class="card-title mb-0">{{ __('Update') }} Provincia</h1>
+                    <h1 class="card-title mb-0">{{ __('Update') }} {{__('Provincia')}}</h1>
                 </div>
                 
                 <form method="POST" action="{{ route('provincias.update', $provincia) }}" 
@@ -28,21 +28,21 @@
                                     <button class="nav-link active" id="tab1-btn" data-bs-toggle="tab" 
                                             data-bs-target="#tab1" type="button" role="tab" 
                                             aria-controls="tab1" aria-selected="true">
-                                        Notas
+                                        {{__('Notas')}}
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="tab2-btn" data-bs-toggle="tab" 
                                             data-bs-target="#tab2" type="button" role="tab" 
                                             aria-controls="tab2" aria-selected="false">
-                                        SEO
+                                        {{__('SEO')}}
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="tab3-btn" data-bs-toggle="tab" 
                                             data-bs-target="#tab3" type="button" role="tab" 
                                             aria-controls="tab3" aria-selected="false">
-                                        Acción
+                                        {{__('Acción')}}
                                     </button>
                                 </li>
                             </ul>

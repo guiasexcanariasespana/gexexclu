@@ -13,7 +13,7 @@
                     <div class="col-1">
                         <p class="text-base font-extrabold md:text-5xl mb-10  ">
                             <span class="inline-block bg-[#bb1a19] py-1 px-2 text-base font-medium text-white">
-                                Acerca de Mi
+                                {{__('Acerca de Mi')}}
                             </span>
                         </p>
                         <h1 class=" inline text-4xl font-extrabold  align-middle text-black mr-5">{{ $anuncio->nombre }}: {{ $anuncio->titulo }}</h1>

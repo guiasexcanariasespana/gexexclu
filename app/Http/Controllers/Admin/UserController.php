@@ -235,7 +235,22 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->update(['verificado' => 'Si']);
-        Mail::to($user->email)->send(new VerificacionPerfilMail($user));
+        try{
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($user->email)->send(new VerificacionPerfilMail($user));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'user_id' => $user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
         return redirect()->route('admin.users.show', $user)
             ->with('success', 'User updated successfully');
     }
@@ -244,7 +259,22 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->update(['verificado' => 'Rechazado']);
-        Mail::to($user->email)->send(new VerificacionPerfilMail($user));
+         try{
+            // Verificar que el usuario tenga email antes de intentar enviar
+            if (!empty($anuncio->user->email)) {
+                Mail::to($user->email)->send(new VerificacionPerfilMail($user));
+            } else {
+                \Log::warning('El usuario no tiene email configurado para enviar notificación', [
+                    'user_id' => $user->id
+                ]);
+            }
+        } catch (\Swift_TransportException $e) {
+                 // Error específico de transporte (problemas SMTP, conexión)
+            \Log::error('Error de transporte al enviar email: ' . $e->getMessage());
+            } catch (\Exception $e) {
+                // Cualquier otro error
+                \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
+        }
         return redirect()->route('admin.users.show', $user)
             ->with('success', 'User updated successfully');
     }
@@ -271,7 +301,7 @@ class UserController extends Controller
             $user->delete();
 
             // Redirigir con mensaje de éxito
-            return redirect()->route('admin.new.accesos')
+            return redirect()->route('admin.accesos')
                 ->with('success', trans('messages.delete-confirm'));
 
         } catch (\Throwable $e) {

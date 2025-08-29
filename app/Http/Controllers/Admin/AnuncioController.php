@@ -242,18 +242,12 @@ class AnuncioController extends Controller
 
     public function aprobar_anuncio(Anuncio $anuncio)
     {        
-        if(is_null($anuncio->fecha_de_publicacion)){
-            $fecha_publi = Carbon::now();      
-        }else{
-            $fecha_publi = Carbon::parse($anuncio->fecha_de_publicacion);
-        }  
-        $fecha_fin = Carbon::now();
-        $hora_actual = $fecha_publi->format('H');
-        if ($hora_actual > config('app.hora_agregar_dia')) {
-            $fecha_fin->addDays($anuncio->dias);
-        } else {
-            $fecha_fin->addDays($anuncio->dias - 1);
-        }
+         $fecha_publi = $anuncio->fecha_de_publicacion 
+        ? Carbon::parse($anuncio->fecha_de_publicacion) 
+        : Carbon::now();
+
+        $fecha_fin = (clone $fecha_publi)->addDays($anuncio->dias - 1);
+
         $anuncio->update([
             'estado' => 'Publicado',
             'verificacion' => 'Si',
@@ -277,9 +271,8 @@ class AnuncioController extends Controller
                 // Cualquier otro error
                 \Log::error('Error inesperado al enviar email: ' . $e->getMessage());
             }
-        // Mail::to($anuncio->user->email)->send(new AnuncioFueMailable($anuncio, 'Aprobado'));
-        return redirect()->route('admin.anuncios.index')
-            ->with('success', trans('messages.edit-confirm'));
+            return redirect()->route('admin.anuncios.index')
+           ->with('success', trans('messages.edit-confirm'));
     }
 
     public function rechazar_anuncio(Anuncio $anuncio)

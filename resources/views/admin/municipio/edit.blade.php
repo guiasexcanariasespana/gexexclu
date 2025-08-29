@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('template_title')
-    {{__('Update')}} Municipio
+    {{__('Update')}} {{__('Municipio')}}
 @endsection
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -23,7 +23,7 @@
                             <div class="tab-pane active" id="tab1">
                                 <div class="card card-default">
                                     <div class="card-header">
-                                        <span class="card-title">{{__('Update')}} Municipio</span>
+                                        <span class="card-title">{{__('Update')}} {{__('Municipio')}}</span>
                                     </div>
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('municipios.update', $municipio) }}"  role="form" enctype="multipart/form-data">
@@ -33,12 +33,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab2">
-                                @include('admin.municipio.seo')
+                            <div class="tab-pane fade" id="tab2">
+                                {{-- @include('admin.municipio.seo') --}}
                             </div>
-                            <div class="tab-pane" id="tab3">
+                            <div class="tab-pane fade" id="tab3">
                                 <div class="box-footer mt20">
-                                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                    {{-- <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button> --}}
                                 </div>
                             </div>
                                         </form>

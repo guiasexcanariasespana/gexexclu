@@ -79,11 +79,11 @@
                             @if ($user->verificado == 'No')
                                 <a href="{{ route('admin.user.aprobar_perfil', $user) }}" class="btn btn-success "
                                     data-placement="left">
-                                    Si
+                                    {{__('Si')}}
                                 </a>
                                 <a href="{{ route('admin.user.rechazar_perfil', $user) }}" class="btn btn-danger "
                                     data-placement="left">
-                                    Rechazar
+                                    {{__('Rechazar')}}
                                 </a>
                             @endif
 

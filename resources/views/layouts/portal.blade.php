@@ -257,9 +257,13 @@
         </div>
         <div>
             <div class="grid grid-flow-col gap-4">
-                Aviso legal y Condiciones de Uso.
-                Términos y Condiciones General de Contratación. 
-                Pólitica de Privacidad. 
+                
+                <label for="terms" class="font-medium text-white">
+                {{__('Aviso legal y Condiciones de Uso.')}} 
+                    <a href="{{ route('terms.show') }}" target="_blank" class="text-white hover:text-grey-700">{{__('Términos y Condiciones General de Contratación.')}}</a> 
+                                {{-- {{__('y la')}}  --}}
+                    <a href="{{ route('policy.show') }}" target="_blank" class="text-white hover:text-grey-700">{{__('Pólitica de Privacidad.')}}</a>
+                </label> 
                 Pólitica de Cookies. 
             </div>
         </div>
